@@ -1,38 +1,138 @@
-.App {
-  text-align: center;
+/* App.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.animated-bg {
+  background: linear-gradient(to right, #1a1f1d, #0b2b30, #102f26);
+  transition: background 1s ease-in-out;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.animated-section {
+  animation: fadeInUp 1s ease-out;
+}
+
+.animated-image {
+  animation: zoomIn 1s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 2px solid rgba(0, 255, 170, 0.2);
+}
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: 16px;
+  width: 12px;
+  height: 12px;
+  background-color: #00ffaa;
+  border-radius: 50%;
+}
+.timeline {
+  border-left: 2px solid rgba(0, 255, 170, 0.2);
+}
+.timeline-item {
+  padding-left: 1rem;
+}
+.timeline-dot {
+  z-index: 2;
+}
+
+.logo-spin {
+  animation: coin-rotate 15s ease-in-out infinite;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  background-color: transparent;
+}
+@keyframes coin-rotate {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(1080deg); /* 3 full spins = 360 * 3 */
+  }
+}
+
+.profile-pic {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 1rem; /* Rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 2px solid #444;
+}
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #00ffaa;
+}
+
+.about-text {
+  font-size: 1.1rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.skill-box {
+  background-color: rgba(0, 32, 25, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 255, 170, 0.1);
+}
+
+.skill-title {
+  font-weight: 600;
+  color: #00ffaa;
+}
+
+.skill-item {
+  font-size: 1rem;
+  color: #eee;
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #00ffaa;
+}
+
+.experience-desc {
+  color: #ccc;
+  font-size: 1rem;
+}
+
+
+
+
+
