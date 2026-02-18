@@ -1,44 +1,99 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+const LINKS = [
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Experience", href: "#experience" },
+  { label: "Education", href: "#education" },
+  { label: "Certifications", href: "#certifications" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
+];
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  // Close menu on Escape
+  useEffect(() => {
+    function onKeyDown(e) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  // Prevent background scroll when menu is open (mobile)
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   return (
-    <nav className="navbar navbar-dark navbar-expand-lg bg-dark sticky-top shadow-sm py-2">
-      <div className="container-fluid">
-        <a className="navbar-brand d-flex align-items-center gap-2" href="#top">
-          <img
-            src="/logo.webp"
-            alt="Nivedita Ganesh Logo"
-            style={{ height: "36px" }}
-          />
-          <span className="d-none d-sm-inline" style={{ fontSize: "1rem", fontWeight: 500 }}>
-            Nivedita Ganesh
-          </span>
+    <header className="topbar" id="top">
+      <nav className="navwrap" aria-label="Primary">
+        <a className="brand" href="#top" onClick={() => setOpen(false)}>
+          <img className="brand-logo" src="/logo.webp" alt="Nivedita Ganesh Logo" />
+          <span className="brand-name">Nivedita Ganesh</span>
         </a>
 
         <button
-          className="navbar-toggler"
+          className="nav-toggle"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="hamburger" aria-hidden="true" />
         </button>
 
-        <div className="justify-content-end d-flex">
+        {/* Desktop links */}
+        <ul className="navlinks" role="list">
+          {LINKS.map((l) => (
+            <li key={l.href}>
+              <a className="navlink" href={l.href}>
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-          <ul className="navbar-nav text-end">
-            <li className="nav-item"><a className="nav-link" href="#about">About</a></li>
-            <li className="nav-item"><a className="nav-link" href="#skills">Skills</a></li>
-            <li className="nav-item"><a className="nav-link" href="#experience">Experience</a></li>
-            <li className="nav-item"><a className="nav-link" href="#education">Education</a></li>
-            <li className="nav-item"><a className="nav-link" href="#certifications">Certifications</a></li>
-            <li className="nav-item"><a className="nav-link" href="#projects">Projects</a></li>
+      {/* Mobile drawer */}
+      <div className={`drawer ${open ? "is-open" : ""}`} aria-hidden={!open}>
+        <div className="drawer-panel" role="dialog" aria-label="Menu">
+          <div className="drawer-head">
+            <span className="drawer-title">Menu</span>
+            <button className="drawer-close" onClick={() => setOpen(false)} aria-label="Close">
+              ✕
+            </button>
+          </div>
+
+          <ul className="drawer-links" role="list">
+            {LINKS.map((l) => (
+              <li key={l.href}>
+                <a
+                  className="drawer-link"
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
+
+        {/* Click outside to close */}
+        <button
+          className="drawer-backdrop"
+          aria-label="Close menu"
+          onClick={() => setOpen(false)}
+        />
       </div>
-    </nav>
+    </header>
   );
 }
