@@ -3,24 +3,24 @@ export const featuredProjects = [
     title: "Event-Driven Cloud Platform",
     status: "Completed",
     oneLiner:
-      "Production-style AWS event-driven architecture focused on decoupling, reliability, and scalable ingestion.",
+      "AWS event-driven platform designed for decoupling, reliability, and scalable ingestion.",
     details: [
-      "Built an event-driven flow using API Gateway → Lambda → SQS → S3 (Bronze/Silver) with DynamoDB where needed.",
-      "Designed for asynchronous processing to isolate failures and handle bursty workloads.",
-      "Provisioned infrastructure with Terraform for repeatable deployments and modular upgrades.",
+      "Built an async flow: API Gateway → Lambda → SQS → S3 (Bronze/Silver), with DynamoDB where state was needed.",
+      "Designed for burst handling and failure isolation with retries + DLQ patterns.",
+      "Provisioned the full stack using modular Terraform for repeatable deployments.",
     ],
     decisions: [
       {
         label: "Why SQS in the middle?",
-        text: "To decouple producers/consumers, absorb spikes, and make retries/failures a first-class part of the design.",
+        text: "To decouple producers and consumers, absorb spikes, and make retries/failures a first-class design concern.",
       },
       {
         label: "Why Bronze/Silver on S3?",
-        text: "To separate raw ingestion from curated outputs and keep the pipeline auditable and analytics-ready.",
+        text: "To keep raw ingestion immutable while curated outputs evolve safely — auditability + analytics readiness.",
       },
       {
         label: "Terraform approach",
-        text: "Modular Terraform to reduce drift, enforce consistency, and make the system reproducible across environments.",
+        text: "Reusable modules to reduce drift, enforce consistency, and reproduce environments quickly.",
       },
     ],
     tags: [
@@ -39,122 +39,97 @@ export const featuredProjects = [
       },
     ],
   },
+
   {
     title: "CreatorOps Lakehouse",
     status: "In Progress",
     oneLiner:
-      "SaaS-style operational analytics platform on Databricks/Delta Lake using a publishing workflow event model.",
+      "Databricks + Delta Lake product-style analytics system for creator publishing workflow events.",
     details: [
-      "Modeling realistic creator workflow events (draft_created, chapter_written, feedback, publish, engagement).",
-      "Implementing Delta Lake medallion architecture with scalable ingestion and incremental transforms.",
-      "Designing for observability and evolution: schema changes, revisions, and operational metrics.",
+      "Modeled realistic workflow events (draft → revise → feedback → publish → engagement/drop-off).",
+      "Implementing a Delta medallion architecture with incremental ingestion and transformations.",
+      "Designing for evolution: schema changes, revisions, and operational metrics over time.",
     ],
     decisions: [
       {
         label: "Why this domain?",
-        text: "It’s a product-style analytics system (not a demo dataset) with realistic event flows and operational reporting needs.",
+        text: "It’s a realistic operational analytics system with event flows and reporting needs — not a toy dataset.",
       },
       {
         label: "Why medallion?",
-        text: "It supports auditability and iterative refinement — raw events remain intact while curated tables evolve safely.",
+        text: "Keeps raw events intact while curated tables evolve with confidence and traceability.",
       },
       {
-        label: "How you’ll prove it",
-        text: "A working pipeline + clear data model + queryable operational metrics (drop-off, engagement, revision rates).",
+        label: "How it will be proven",
+        text: "Working pipeline + documented data model + queryable KPIs (revision rates, engagement, drop-off).",
       },
     ],
     tags: ["Databricks", "Delta Lake", "PySpark", "Lakehouse"],
     links: [],
+    linkHint: "Repo in progress",
   },
+
   {
     title: "Platform Automation (CI/CD + IaC Patterns)",
-    status: "Planned / Building",
+    status: "Building",
     oneLiner:
-      "Reusable CI/CD patterns, environment promotion, and safe deployments you can apply across projects.",
+      "Reusable pipeline patterns for safe delivery: promotions, gates, versioning, and rollback habits.",
     details: [
-      "Reusable pipeline templates (lint/test/build/deploy) with environment-based configuration.",
-      "Deployment safety: preview deploys, manual approvals, and quality gates where appropriate.",
-      "Automation patterns: baseline Terraform modules, policy checks, secrets hygiene.",
+      "Reusable CI/CD templates (lint/test/build/deploy) with environment-based configuration.",
+      "Delivery safety: preview deploys, approvals where needed, and quality gates.",
+      "IaC hygiene: baseline Terraform modules, policy checks, and secrets best practices.",
     ],
     decisions: [
       {
         label: "Why this matters",
-        text: "DevOps hiring is about repeatability and safety. This shows delivery as a system, not a manual process.",
+        text: "DevOps hiring is about repeatability. This shows delivery as a system, not manual steps.",
       },
       {
         label: "What makes it non-generic",
-        text: "Same conventions across repos: consistent pipeline stages, tagging/versioning, and rollback strategy.",
+        text: "Same conventions across repos: consistent stages, tagging/versioning, and rollback strategy.",
       },
     ],
     tags: ["CI/CD", "GitHub Actions", "Terraform", "Release Automation"],
     links: [],
-  },
-  {
-    title: "Backend Depth (Systems Engineering Focus)",
-    status: "Planned / Building",
-    oneLiner:
-      "Backend systems project emphasizing system design, performance, reliability, and pragmatic tradeoffs.",
-    details: [
-      "A backend service with clear boundaries: API design, data access patterns, background jobs, and caching where needed.",
-      "Operational depth: structured logs, failure modes, and performance baselines.",
-      "Designed to be deployed and monitored — not just run locally.",
-    ],
-    decisions: [
-      {
-        label: "Why include this alongside cloud projects?",
-        text: "Platform work and backend judgment are connected: APIs, data consistency, and operational reliability.",
-      },
-      {
-        label: "How you’ll prove depth",
-        text: "Document tradeoffs, add runbooks, and define measurable performance/availability goals.",
-      },
-    ],
-    tags: ["API Design", "Reliability", "Performance", "Observability"],
-    links: [],
+    linkHint: "Blueprints shipping soon",
   },
 ];
 
-export const otherProjects = [
+/**
+ * Enterprise Highlights: real work that can’t be open-sourced.
+ * Keep these short + impact-based.
+ */
+export const enterpriseHighlights = [
   {
-    title: "Admin Application",
+    title: "Admin Application (Operations & Reprocessing)",
     oneLiner:
-      "Internal dashboard for reprocessing failed media jobs and managing operational workflows.",
+      "Internal dashboard for reprocessing failed jobs and managing operational workflows.",
+    impact:
+      "Improved operational handling of failed runs with clear retries + status tracking.",
     tags: ["Angular", "Node.js", "MongoDB", "Docker"],
-    links: [],
   },
   {
-    title: "Public Media Library",
+    title: "Public Media Library (Upload + Analytics Workflows)",
     oneLiner:
-      "Backend-heavy media upload + analytics workflows with cloud storage integration.",
+      "Backend-heavy media upload workflows with cloud storage integration and analytics hooks.",
+    impact:
+      "Built resilient upload flows and backend processing patterns for large media workloads.",
     tags: ["Angular", "Node.js", "MongoDB", "AWS S3"],
-    links: [],
   },
   {
-    title: "Construction Delegation Tool",
+    title: "Construction Delegation Tool (Alerts + Tracking)",
     oneLiner:
-      "Issue tracking and real-time alerts with scalable API patterns and background processing.",
+      "Issue tracking with alerts and scalable API patterns for operational teams.",
+    impact:
+      "Reduced coordination overhead with structured workflows and automated notifications.",
     tags: ["React", "Node.js", "MongoDB", "AWS EC2"],
-    links: [],
   },
   {
-    title: "Money Manager App",
-    oneLiner:
-      "Personal finance tracker with reporting dashboards and backend services.",
-    tags: ["React", "Node.js", "MySQL", "AWS QuickSight"],
-    links: [],
-  },
-  {
-    title: "Help Desk Portal",
+    title: "Help Desk Portal (Ticketing Workflows)",
     oneLiner:
       "Ticketing platform with severity tagging and workflow status tracking.",
+    impact:
+      "Improved triage speed and visibility with consistent status + severity conventions.",
     tags: ["React", "Node.js", "Express", "MongoDB"],
-    links: [],
-  },
-  {
-    title: "S.M.A.R.T Blood Monitoring",
-    oneLiner:
-      "Alerting system to notify donors when inventory dips below threshold levels.",
-    tags: ["React", "Node.js", "MongoDB", "Firebase"],
-    links: [],
   },
 ];

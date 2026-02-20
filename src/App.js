@@ -14,13 +14,15 @@ export default function App() {
   return (
     <div className="app">
       <Navbar />
-      <Hero />
-      <About />
-      <SkillsSection />
-      <ExperienceSection />
-      <EducationSection />
-      <CertificationsSection />
-      <ProjectsSection />
+      <main className="page">
+        <Hero />
+        <About />
+        <SkillsSection />
+        <ExperienceSection />
+        <EducationSection />
+        <CertificationsSection />
+        <ProjectsSection />
+      </main>
       <Footer />
     </div>
   );

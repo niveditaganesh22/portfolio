@@ -32,10 +32,12 @@ export default function Navbar() {
     };
   }, [open]);
 
+  const onNavClick = () => setOpen(false);
+
   return (
     <header className="topbar" id="top">
       <nav className="navwrap" aria-label="Primary">
-        <a className="brand" href="#top" onClick={() => setOpen(false)}>
+        <a className="brand" href="#top" onClick={onNavClick}>
           <img className="brand-logo" src="/logo.webp" alt="Nivedita Ganesh Logo" />
           <span className="brand-name">Nivedita Ganesh</span>
         </a>
@@ -45,16 +47,17 @@ export default function Navbar() {
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
+          aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
         >
           <span className="hamburger" aria-hidden="true" />
         </button>
 
         {/* Desktop links */}
-        <ul className="navlinks" role="list">
+        <ul className="navlinks">
           {LINKS.map((l) => (
             <li key={l.href}>
-              <a className="navlink" href={l.href}>
+              <a className="navlink" href={l.href} onClick={onNavClick}>
                 {l.label}
               </a>
             </li>
@@ -63,23 +66,28 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile drawer */}
-      <div className={`drawer ${open ? "is-open" : ""}`} aria-hidden={!open}>
+      <div
+        id="mobile-menu"
+        className={`drawer ${open ? "is-open" : ""}`}
+        aria-hidden={!open}
+      >
         <div className="drawer-panel" role="dialog" aria-label="Menu">
           <div className="drawer-head">
             <span className="drawer-title">Menu</span>
-            <button className="drawer-close" onClick={() => setOpen(false)} aria-label="Close">
+            <button
+              className="drawer-close"
+              onClick={() => setOpen(false)}
+              aria-label="Close"
+              type="button"
+            >
               ✕
             </button>
           </div>
 
-          <ul className="drawer-links" role="list">
+          <ul className="drawer-links">
             {LINKS.map((l) => (
               <li key={l.href}>
-                <a
-                  className="drawer-link"
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                >
+                <a className="drawer-link" href={l.href} onClick={onNavClick}>
                   {l.label}
                 </a>
               </li>
@@ -92,6 +100,7 @@ export default function Navbar() {
           className="drawer-backdrop"
           aria-label="Close menu"
           onClick={() => setOpen(false)}
+          type="button"
         />
       </div>
     </header>

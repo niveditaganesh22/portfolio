@@ -3,27 +3,33 @@ import React from "react";
 export default function About() {
   return (
     <section className="about" id="about">
-      <h2>About</h2>
-<p>
-          I work at the intersection of cloud infrastructure and platform
-          engineering. Over the past few years, I’ve focused on designing and
-          operating AWS and Azure systems that are meant to last — not just
-          deploy.
+      <div className="section-head">
+        <h2>About</h2>
+        <p className="section-subtitle">
+          Cloud infrastructure and platform engineering — built to last, not just deploy.
+        </p>
+      </div>
+
+      <div className="prose">
+        <p>
+          I design and operate AWS and Azure environments with a strong focus on 
+          Terraform-driven infrastructure, CI/CD automation, and production reliability. 
+          My work centers on building systems that scale predictably under real-world load — 
+          not just in staging.
         </p>
 
         <p>
-          My core work revolves around Terraform-driven infrastructure, CI/CD
-          automation, and building systems that are reliable under real
-          production pressure. I’m particularly drawn to platform-level problems
-          — how systems are structured, how they evolve, and how infrastructure
-          decisions affect long-term scalability.
+          I’m particularly interested in platform-level engineering: how systems are structured, 
+          how they evolve over time, and how infrastructure decisions influence long-term 
+          performance, maintainability, and cost.
         </p>
 
         <p>
-          More recently, I’ve been working with Databricks — building ingestion
-          pipelines, experimenting with medallion architectures, and exploring
-          how operational analytics systems support AI and ML workloads.
+          More recently, I’ve been working with Databricks — building ingestion pipelines, 
+          implementing medallion architectures, and supporting analytics systems that power 
+          AI and ML workloads.
         </p>
+      </div>
     </section>
   );
 }
