@@ -65,8 +65,11 @@ export const featuredProjects = [
       },
     ],
     tags: ["Databricks", "Delta Lake", "PySpark", "Lakehouse"],
-    links: [],
-    linkHint: "Repo in progress",
+    links: [{
+        label: "GitHub",
+        href: "https://github.com/niveditaganesh22/creatorops-lakehouse",
+      },],
+
   },
 
   {
