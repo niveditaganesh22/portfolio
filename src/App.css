@@ -28,6 +28,9 @@
 
   --shadow: 0 18px 46px rgba(0,0,0,0.45);
   --ring: 0 0 0 3px rgba(56,189,248,0.22);
+
+  /* Sticky navbar anchor offset */
+  --nav-offset: 90px;
 }
 
 /* ---------- Base reset ---------- */
@@ -60,6 +63,8 @@ button:focus-visible {
   border-radius: 12px;
 }
 
+.muted { color: rgba(255,255,255,0.60); }
+
 /* ---------- Global section layout ---------- */
 .hero,
 .about,
@@ -68,32 +73,74 @@ button:focus-visible {
 .education,
 .certifications,
 .projects,
+.contact,
 .footer {
   max-width: var(--container);
   margin: 0 auto;
   padding: var(--section-y) var(--gutter);
   border-bottom: 1px solid rgba(255,255,255,0.06);
+
+  /* Fix for sticky navbar cutting headings on anchor navigation */
+  scroll-margin-top: var(--nav-offset);
 }
 
-/* ---------- Typography ---------- */
-h1, h2, h3, h4 { margin: 0; line-height: 1.12; letter-spacing: -0.02em; }
+/* ---------- Typography (one consistent system) ---------- */
 
+/* Base */
+body {
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: 0;
+}
+
+/* Headings: only headings get negative tracking */
+h1, h2, h3, h4 {
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.015em; /* softer than -0.02, less “shouty” */
+  color: rgba(255,255,255,0.94);
+}
+
+/* Hero heading: stable weight (avoid 780/800 look) */
+h1 {
+  font-size: clamp(2.15rem, 3.5vw, 3.2rem);
+  font-weight: 700; /* was bouncing around */
+  line-height: 1.06;
+}
+
+/* Section headings */
 h2 {
-  font-size: clamp(1.35rem, 1.8vw, 1.75rem);
-  font-weight: 780;
+  font-size: clamp(1.45rem, 2.0vw, 1.85rem);
+  font-weight: 750; /* instead of 780 */
 }
 
-p { margin: 0; color: var(--muted); }
+h3 {
+  font-size: 1.08rem;
+  font-weight: 700;
+}
 
+h4 {
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+/* Paragraphs */
+p {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 450; /* keeps body consistent everywhere */
+}
+
+/* Subtitles */
 .section-head { margin-bottom: 14px; }
+
 .section-subtitle {
   margin-top: 8px;
   color: var(--muted-2);
   max-width: 72ch;
+  font-weight: 450;
+  line-height: 1.55;
 }
-
-.muted { color: rgba(255,255,255,0.60); }
-
 /* =========================================================
    Navbar
    ========================================================= */
@@ -165,6 +212,7 @@ p { margin: 0; color: var(--muted); }
   border: 1px solid rgba(255,255,255,0.14);
   background: rgba(255,255,255,0.03);
   color: rgba(255,255,255,0.92);
+  cursor: pointer;
 }
 
 .hamburger {
@@ -184,52 +232,93 @@ p { margin: 0; color: var(--muted); }
 .hamburger::before { top: -6px; }
 .hamburger::after  { top:  6px; }
 
-/* Drawer */
+/* =========================================================
+   Drawer (mobile) — FIXED layering so close works
+   ========================================================= */
 .drawer { display: none; }
-.drawer.is-open { display: block; position: fixed; inset: 0; z-index: 2000; }
+.drawer.is-open {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+}
 
+/* Backdrop behind the panel */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.62);
+  border: none;
+  padding: 0;
+  z-index: 3000;
+}
+
+/* Panel above backdrop */
 .drawer-panel {
   position: fixed;
-  top: 0; left: 0;
-  width: min(320px, 86vw);
+  top: 0;
+  left: 0;
   height: 100vh;
+  width: min(360px, 88vw);
   background: rgba(11,18,36,0.98);
   border-right: 1px solid rgba(255,255,255,0.10);
   padding: 16px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+  z-index: 3001;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.drawer-head { display:flex; align-items:center; justify-content:space-between; margin-bottom: 12px; }
+@media (max-width: 640px) {
+  .drawer-panel {
+    width: 100vw;
+    border-right: none;
+  }
+}
+
+.drawer-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom: 12px;
+}
+
 .drawer-title { font-weight: 650; color: rgba(255,255,255,0.94); }
 
 .drawer-close {
-  width: 38px; height: 38px;
-  border-radius: 10px;
+  position: relative;
+  z-index: 3002;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.14);
   background: rgba(255,255,255,0.03);
   color: rgba(255,255,255,0.92);
+  cursor: pointer;
 }
 
-.drawer-links { list-style:none; margin: 10px 0 0; padding:0; display:grid; gap:6px; }
+.drawer-links {
+  list-style:none;
+  margin: 10px 0 0;
+  padding:0;
+  display:grid;
+  gap:10px;
+}
+
 .drawer-link {
   display:block;
-  padding:10px 12px;
-  border-radius: 10px;
-  font-weight: 650;
+  padding:14px 14px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1.05rem;
   color: rgba(255,255,255,0.92);
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
 }
+
 .drawer-link:hover {
   border-color: rgba(56,189,248,0.25);
   background: rgba(255,255,255,0.05);
-}
-
-.drawer-backdrop {
-  position:fixed; inset:0;
-  background: rgba(0,0,0,0.55);
-  border:none;
-  padding:0;
 }
 
 /* =========================================================
@@ -270,7 +359,7 @@ p { margin: 0; color: var(--muted); }
   background: rgba(255,255,255,0.035);
 }
 
-/* LinkedIn exact vibe */
+/* LinkedIn */
 .btn-linkedin {
   color: #fff;
   background: linear-gradient(180deg, #2F7FD6 0%, #0A66C2 100%);
@@ -368,6 +457,7 @@ p { margin: 0; color: var(--muted); }
 .hero h1 {
   font-size: clamp(2.35rem, 3.6vw, 3.25rem);
   font-weight: 650;
+  letter-spacing: -0.012em;
   color: rgba(255,255,255,0.96);
 }
 
@@ -403,7 +493,6 @@ p { margin: 0; color: var(--muted); }
   align-items: start;
 }
 
-/* first row buttons */
 .hero-actions-row {
   display: flex;
   gap: 12px;
@@ -411,7 +500,6 @@ p { margin: 0; color: var(--muted); }
   align-items: center;
 }
 
-/* LinkedIn row like reference (button + hint) */
 .hero-linkedin-row {
   display: flex;
   align-items: center;
@@ -424,7 +512,6 @@ p { margin: 0; color: var(--muted); }
   line-height: 1.5;
 }
 
-/* Right card */
 .hero-right { display: flex; justify-content: flex-end; }
 
 .hero-card {
@@ -432,7 +519,6 @@ p { margin: 0; color: var(--muted); }
   background:
     radial-gradient(980px 520px at 30% 10%, rgba(56,189,248,0.11), transparent 56%),
     rgba(255,255,255,0.03);
-
   border: 1px solid rgba(255,255,255,0.10);
   border-radius: 26px;
   padding: 22px 24px 18px;
@@ -464,7 +550,7 @@ p { margin: 0; color: var(--muted); }
   border: 3px solid rgba(56,189,248,0.55);
 }
 
-.hero-status { display: none; } /* hides the old online dot if present */
+.hero-status { display: none; }
 
 .hero-card-name {
   font-size: 1.26rem;
@@ -517,11 +603,10 @@ p { margin: 0; color: var(--muted); }
   justify-content: center;
 }
 
-/* About paragraph spacing */
 .about .prose p + p { margin-top: 22px; }
 
 /* =========================================================
-   SKILLS — Compact + Consistent Card Heights
+   SKILLS
    ========================================================= */
 .skills-grid {
   margin-top: 16px;
@@ -536,25 +621,16 @@ p { margin: 0; color: var(--muted); }
   padding: 16px 18px 14px;
   border-radius: 16px;
   border: 1px solid rgba(255,255,255,0.10);
-
   background:
     radial-gradient(700px 280px at 20% 0%, rgba(56,189,248,0.08), transparent 60%),
     rgba(255,255,255,0.03);
-
   box-shadow: 0 10px 32px rgba(0,0,0,0.25);
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-
   min-height: 130px;
   height: 100%;
-
-  transition:
-    transform 160ms ease,
-    border-color 160ms ease,
-    background 160ms ease,
-    box-shadow 160ms ease;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
 }
 
 .skill-card::before {
@@ -600,12 +676,10 @@ p { margin: 0; color: var(--muted); }
   border-radius: 999px;
   background: rgba(255,255,255,0.035);
   border: 1px solid rgba(255,255,255,0.10);
-
   color: rgba(229,231,235,0.90);
   font-size: 0.80rem;
   font-weight: 640;
   line-height: 1;
-
   transition: background 150ms ease, border-color 150ms ease;
 }
 
@@ -615,7 +689,7 @@ p { margin: 0; color: var(--muted); }
 }
 
 /* =========================================================
-   EDUCATION / CERTIFICATIONS (Premium stacked cards)
+   EDUCATION / CERTIFICATIONS
    ========================================================= */
 .cards {
   margin-top: 16px;
@@ -651,9 +725,7 @@ p { margin: 0; color: var(--muted); }
 }
 .card-list li { margin: 8px 0; }
 
-.card-actions {
-  margin-top: 14px;
-}
+.card-actions { margin-top: 14px; }
 
 .link {
   color: var(--accent);
@@ -661,22 +733,21 @@ p { margin: 0; color: var(--muted); }
 }
 .link:hover { text-decoration: underline; }
 
-/* Force stacked full-width cards for these sections */
+/* Force stacked full-width cards */
 .education .cards,
 .certifications .cards {
   grid-template-columns: 1fr;
   gap: 16px;
 }
-
 .education .card,
 .certifications .card {
   padding: 22px 22px 20px;
   border-radius: 20px;
 }
+
 /* =========================================================
    PROJECTS (Featured + Enterprise) — premium + recruiter-clean
    ========================================================= */
-
 .projects-grid {
   margin-top: 16px;
   display: grid;
@@ -685,8 +756,6 @@ p { margin: 0; color: var(--muted); }
   align-items: stretch;
 }
 
-/* Base project card already has .project from global card system,
-   but we refine spacing/layout here */
 .project--featured {
   padding: 18px;
   display: flex;
@@ -694,12 +763,8 @@ p { margin: 0; color: var(--muted); }
   min-height: 240px;
 }
 
-.project-head {
-  display: grid;
-  gap: 10px;
-}
+.project-head { display: grid; gap: 10px; }
 
-/* Title spacing */
 .project-title {
   font-size: 1.06rem;
   font-weight: 780;
@@ -707,14 +772,12 @@ p { margin: 0; color: var(--muted); }
   letter-spacing: -0.01em;
 }
 
-/* Status + View details row */
 .project-meta {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-/* Status pill = only pill */
 .project-status {
   display: inline-flex;
   align-items: center;
@@ -734,7 +797,6 @@ p { margin: 0; color: var(--muted); }
   border-color: rgba(255,255,255,0.10);
 }
 
-/* View details as text-link (not pill) */
 .project-detailsLink {
   padding: 0;
   background: transparent;
@@ -745,12 +807,10 @@ p { margin: 0; color: var(--muted); }
   font-size: 0.92rem;
   text-decoration: none;
 }
-
 .project-detailsLink:hover {
   text-decoration: underline;
   opacity: 0.95;
 }
-
 .project-detailsLink--disabled {
   cursor: default;
   color: rgba(255,255,255,0.45);
@@ -763,7 +823,6 @@ p { margin: 0; color: var(--muted); }
   line-height: 1.65;
 }
 
-/* Clean tech line (NO pills) */
 .project-tech,
 .enterprise-tech {
   margin-top: 12px;
@@ -792,33 +851,29 @@ p { margin: 0; color: var(--muted); }
   padding-top: 12px;
   border-top: 1px solid rgba(255,255,255,0.08);
 }
-
 .project-decisions h4 {
   font-size: 0.95rem;
   font-weight: 780;
   color: rgba(255,255,255,0.86);
   margin: 0 0 10px;
 }
-
 .project-decisions dl {
   display: grid;
   gap: 10px;
   margin: 0;
 }
-
 .decision dt {
   font-weight: 780;
   color: rgba(255,255,255,0.90);
   margin-bottom: 4px;
 }
-
 .decision dd {
   margin: 0;
   color: rgba(255,255,255,0.70);
   line-height: 1.65;
 }
 
-/* Footer pinned to bottom */
+/* Footer pinned */
 .project-footer {
   margin-top: auto;
   padding-top: 14px;
@@ -827,7 +882,6 @@ p { margin: 0; color: var(--muted); }
   justify-content: space-between;
   gap: 12px;
 }
-
 .project-github {
   color: rgba(255,255,255,0.66);
   font-weight: 700;
@@ -836,16 +890,12 @@ p { margin: 0; color: var(--muted); }
   color: rgba(255,255,255,0.84);
   text-decoration: underline;
 }
-
 .project-muted {
   color: rgba(255,255,255,0.50);
   font-weight: 600;
 }
 
-/* =========================================================
-   Enterprise section
-   ========================================================= */
-
+/* Enterprise */
 .projects-split {
   margin-top: 22px;
   padding-top: 18px;
@@ -859,10 +909,7 @@ p { margin: 0; color: var(--muted); }
   gap: 16px;
 }
 
-.projects-split-head > div {
-  flex: 1;
-  min-width: 0;
-}
+.projects-split-head > div { flex: 1; min-width: 0; }
 
 .projects-note {
   margin-top: 10px;
@@ -871,7 +918,6 @@ p { margin: 0; color: var(--muted); }
   line-height: 1.55;
 }
 
-/* Show/Hide button (keep as button, secondary) */
 .project-toggle {
   height: 34px;
   padding: 0 12px;
@@ -914,9 +960,7 @@ p { margin: 0; color: var(--muted); }
   gap: 14px;
 }
 
-.enterprise-main .project-title {
-  margin-bottom: 6px;
-}
+.enterprise-main .project-title { margin-bottom: 8px; }
 
 .enterprise-impact {
   margin-top: 12px;
@@ -924,21 +968,6 @@ p { margin: 0; color: var(--muted); }
   line-height: 1.6;
 }
 
-/* =========================================================
-   Responsive
-   ========================================================= */
-
-@media (max-width: 960px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 860px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-}
 /* =========================================================
    EXPERIENCE
    ========================================================= */
@@ -959,8 +988,9 @@ p { margin: 0; color: var(--muted); }
    FOOTER
    ========================================================= */
 .footer { border-bottom: none; }
+
 .footer-inner {
-  border-top: none;
+  border-top: none; /* prevents double divider feel */
   padding-top: 20px;
 }
 
@@ -978,14 +1008,13 @@ p { margin: 0; color: var(--muted); }
   .hero-right { justify-content: flex-start; }
   .hero-card { width: min(720px, 100%); }
   .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
   .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 860px) {
   .nav-toggle { display: inline-flex; align-items:center; justify-content:center; }
   .navlinks { display: none; }
-  .drawer { display: block; }
+ 
 
   .cards { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: 1fr; }
@@ -1014,23 +1043,4 @@ p { margin: 0; color: var(--muted); }
   background: var(--surface) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius) !important;
-}
-/* =========================================================
-   FIX: Sticky navbar anchor offset
-   ========================================================= */
-
-:root {
-  --nav-offset: 90px; /* adjust if needed */
-}
-
-.hero,
-.about,
-.skills,
-.experience,
-.education,
-.certifications,
-.projects,
-.footer,
-.contact {
-  scroll-margin-top: var(--nav-offset);
 }
