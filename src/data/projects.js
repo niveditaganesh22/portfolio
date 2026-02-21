@@ -93,8 +93,10 @@ export const featuredProjects = [
       },
     ],
     tags: ["CI/CD", "GitHub Actions", "Terraform", "Release Automation"],
-    links: [],
-    linkHint: "Blueprints shipping soon",
+    links: [{
+        label: "GitHub",
+        href: "https://github.com/niveditaganesh22/deliveryops",
+      },],
   },
 ];
 
