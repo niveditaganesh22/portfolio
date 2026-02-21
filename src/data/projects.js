@@ -74,7 +74,7 @@ export const featuredProjects = [
 
   {
     title: "Platform Automation (CI/CD + IaC Patterns)",
-    status: "Building",
+    status: "In Progress",
     oneLiner:
       "Reusable pipeline patterns for safe delivery: promotions, gates, versioning, and rollback habits.",
     details: [
