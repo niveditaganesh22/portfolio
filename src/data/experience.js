@@ -5,11 +5,11 @@ export const experience = [
     location: "US",
     period: "Nov 2023 – Present",
     impact: [
-      "Built Python automation for provisioning + deployments, cutting manual ops effort by 45% and improving release consistency.",
-      "Standardized infra using reusable Terraform + Ansible modules, reducing drift incidents by 30% and accelerating environment setup by 40%.",
+      "Built Python-based automation to streamline provisioning and deployment workflows, significantly reducing manual operational effort and improving release consistency.",
+      "Standardized infrastructure using reusable Terraform and Ansible modules, minimizing configuration drift and accelerating environment provisioning across development and staging environments.",
     ],
     scope:
-      "Scope: CI/CD for containerized workloads, REST-based automation toolchains, monitoring + alerting dashboards (reliability KPIs +20%).",
+      "Scope: CI/CD automation supporting cloud-hosted and container-based application environments, REST-driven automation toolchains, monitoring and alerting dashboards to track reliability and operational KPIs.",
   },
   {
     role: "DevOps Platform Engineer",
@@ -17,11 +17,11 @@ export const experience = [
     location: "India",
     period: "Mar 2022 – Oct 2023",
     impact: [
-      "Designed and maintained CI/CD pipelines (Jenkins, Docker, GitHub), reducing deployment cycle time by 40% and improving rollout stability.",
-      "Delivered Terraform + Ansible automation for faster, compliant provisioning (+50%) and stronger operational risk control.",
+      "Designed and maintained CI/CD pipelines (Jenkins, Docker, GitHub) to improve deployment efficiency and strengthen rollout stability across multiple application services.",
+      "Delivered Terraform and Ansible automation to enable faster, standardized infrastructure provisioning while aligning with enterprise compliance and security practices.",
     ],
     scope:
-      "Scope: observability improvements (logging/performance monitoring + availability +15%), API-driven integrations reducing manual coordination by 25%.",
+      "Scope: Observability enhancements through structured logging and performance monitoring, API-driven integrations to reduce manual coordination and improve cross-team release workflows.",
   },
   {
     role: "Full Stack & DevOps Engineer",
@@ -29,11 +29,11 @@ export const experience = [
     location: "Canada",
     period: "Nov 2021 – Feb 2022",
     impact: [
-      "Shipped Node.js + Python services integrating with React/Angular frontends; improved API responsiveness and UX by 20%.",
-      "Automated build + deployment workflows, reducing post-release defects by 30% and improving deployment reliability.",
+      "Developed Node.js and Python-based services integrated with frontend applications, improving API responsiveness and overall system usability.",
+      "Automated build and deployment workflows to enhance release reliability and reduce post-deployment defects.",
     ],
     scope:
-      "Scope: containerized dev environments (+25% delivery speed), data workflows using MySQL + MongoDB for reporting/analytics features.",
+      "Scope: Containerized development environments to accelerate delivery cycles, data workflows supporting reporting and analytics features.",
   },
   {
     role: "Full Stack Developer & Cloud Engineer",
@@ -41,11 +41,11 @@ export const experience = [
     location: "Canada",
     period: "Mar 2021 – Nov 2021",
     impact: [
-      "Automated Azure provisioning with Terraform + Ansible, improving repeatability and cutting setup time by 50%.",
-      "Built CI/CD automation + integration scripts to increase processing efficiency by 30% and improve release stability.",
+      "Automated Azure infrastructure provisioning using Terraform and Ansible, improving deployment repeatability and environment consistency.",
+      "Implemented CI/CD automation and integration scripts to streamline application releases and improve operational efficiency.",
     ],
     scope:
-      "Scope: backend services + data operations on MySQL/MongoDB, performance-focused delivery and version-control discipline.",
+      "Scope: Backend service development with managed data services, performance-focused delivery practices, version control discipline.",
   },
   {
     role: "Systems Specialist / Program Analyst",
@@ -53,10 +53,10 @@ export const experience = [
     location: "India",
     period: "Oct 2016 – Apr 2018",
     impact: [
-      "Developed and supported MERN applications for internal platforms, increasing delivery throughput by 35%.",
-      "Optimized CI/CD automation, improving release efficiency by 20% and reducing rollout defects.",
+      "Developed and supported internal MERN-based applications, improving delivery throughput and operational responsiveness.",
+      "Contributed to CI/CD automation and configuration management efforts to enhance release stability and reduce deployment friction.",
     ],
     scope:
-      "Scope: incident response + RCA support, configuration automation to reduce environment drift by 25%, release governance + documentation.",
+      "Scope: Incident response and root cause analysis support, configuration standardization to reduce environment drift, release governance and documentation practices.",
   },
 ];
