@@ -28,7 +28,7 @@ export default function Hero() {
             <div className="hero-actions-row">
               <a className="btn-primary" href="#projects">View Projects</a>
 
-              <a className="btn-secondary" href="/resume.docx" target="_blank" rel="noreferrer">
+              <a className="btn-secondary" href="/NiveditaGanesh__R2026.docx" target="_blank" rel="noreferrer">
                 Download Resume
               </a>
             </div>
