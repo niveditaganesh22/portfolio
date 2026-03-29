@@ -40,37 +40,37 @@ export const featuredProjects = [
     ],
   },
 
-  {
-    title: "CreatorOps Lakehouse",
-    status: "In Progress",
-    oneLiner:
-      "Databricks + Delta Lake product-style analytics system for creator publishing workflow events.",
-    details: [
-      "Modeled realistic workflow events (draft → revise → feedback → publish → engagement/drop-off).",
-      "Implementing a Delta medallion architecture with incremental ingestion and transformations.",
-      "Designing for evolution: schema changes, revisions, and operational metrics over time.",
-    ],
-    decisions: [
-      {
-        label: "Why this domain?",
-        text: "It’s a realistic operational analytics system with event flows and reporting needs — not a toy dataset.",
-      },
-      {
-        label: "Why medallion?",
-        text: "Keeps raw events intact while curated tables evolve with confidence and traceability.",
-      },
-      {
-        label: "How it will be proven",
-        text: "Working pipeline + documented data model + queryable KPIs (revision rates, engagement, drop-off).",
-      },
-    ],
-    tags: ["Databricks", "Delta Lake", "PySpark", "Lakehouse"],
-    links: [{
-        label: "GitHub",
-        href: "https://github.com/niveditaganesh22/creatorops-lakehouse",
-      },],
+  // {
+  //   title: "CreatorOps Lakehouse",
+  //   status: "In Progress",
+  //   oneLiner:
+  //     "Databricks + Delta Lake product-style analytics system for creator publishing workflow events.",
+  //   details: [
+  //     "Modeled realistic workflow events (draft → revise → feedback → publish → engagement/drop-off).",
+  //     "Implementing a Delta medallion architecture with incremental ingestion and transformations.",
+  //     "Designing for evolution: schema changes, revisions, and operational metrics over time.",
+  //   ],
+  //   decisions: [
+  //     {
+  //       label: "Why this domain?",
+  //       text: "It’s a realistic operational analytics system with event flows and reporting needs — not a toy dataset.",
+  //     },
+  //     {
+  //       label: "Why medallion?",
+  //       text: "Keeps raw events intact while curated tables evolve with confidence and traceability.",
+  //     },
+  //     {
+  //       label: "How it will be proven",
+  //       text: "Working pipeline + documented data model + queryable KPIs (revision rates, engagement, drop-off).",
+  //     },
+  //   ],
+  //   tags: ["Databricks", "Delta Lake", "PySpark", "Lakehouse"],
+  //   links: [{
+  //       label: "GitHub",
+  //       href: "https://github.com/niveditaganesh22/creatorops-lakehouse",
+  //     },],
 
-  },
+  // },
 
   {
     title: "Platform Automation (CI/CD + IaC Patterns)",
